@@ -11,15 +11,29 @@ const server = https.createServer({
 
 const io = socketIO(server);
 
+// Charger les messages précédents
+let messages = [];
+fs.readFile('messages.json', (err, data) => {
+    if (err) throw err;
+    messages = JSON.parse(data);
+});
+
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    // Envoyer tous les messages précédents au client
+    socket.emit('load old messages', messages);
 
     socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);
+        messages.push(msg); // Ajouter le nouveau message à l'array
+        io.emit('chat message', msg); // Envoyer le message à tous les clients
+
+        // Sauvegarder le message dans le fichier
+        fs.writeFile('messages.json', JSON.stringify(messages), err => {
+            if (err) throw err;
+        });
     });
 
     socket.on('disconnect', () => {

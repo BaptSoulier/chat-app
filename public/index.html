@@ -4,34 +4,76 @@
     <meta charset="UTF-8">
     <title>Chat Example</title>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const socket = io();
-            const messageForm = document.getElementById('message-form');
-            const messageInput = document.getElementById('message-input');
-            const messagesList = document.getElementById('messages');
+    <style>
+        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f7f7f7; }
+        #chat-container { width: 90%; max-width: 600px; height: 400px; border: 1px solid #ddd; padding: 20px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        #messages { list-style-type: none; padding: 0; margin: 0; overflow-y: auto; flex-grow: 1; }
+        .message { padding: 8px 16px; margin-bottom: 2px; border-radius: 4px; display: flex; }
+        .user1 { background-color: #dcf8c6; align-self: flex-start; margin-right: auto; }
+        .user2 { background-color: #ffefc3; align-self: flex-end; margin-left: auto; }
+        .user-label { font-weight: bold; margin-right: 5px; }
+        #message-form { display: flex; margin-top: 20px; }
+        #message-input { flex-grow: 1; padding: 10px; border-radius: 4px; border: 1px solid #ccc; }
+        button { padding: 10px 20px; border: none; background-color: #007BFF; color: white; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+    </style>
 
-            messageForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                if (messageInput.value) {
-                    socket.emit('chat message', messageInput.value);
-                    messageInput.value = '';
-                }
-            });
-
-            socket.on('chat message', (msg) => {
-                const item = document.createElement('li');
-                item.textContent = msg;
-                messagesList.appendChild(item);
-                window.scrollTo(0, document.body.scrollHeight);
-            });
-        });
-    </script>
 </head>
 <body>
-<ul id="messages"></ul>
-<form id="message-form">
-    <input id="message-input" autocomplete="off"><button>Send</button>
-</form>
+<div id="chat-container">
+    <ul id="messages"></ul>
+    <form id="message-form">
+        <input id="message-input" autocomplete="off" placeholder="Type your message here...">
+        <button type="submit">Send</button>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const socket = io();
+        const messageForm = document.getElementById('message-form');
+        const messageInput = document.getElementById('message-input');
+        const messagesList = document.getElementById('messages');
+
+        // Assignation aléatoire de l'utilisateur pour la démonstration
+        const userId = Math.random() < 0.5 ? 'user1' : 'user2';
+
+        // Recevoir et afficher les anciens messages
+        socket.on('load old messages', (messages) => {
+            messages.forEach((msg) => {
+                displayMessage(msg);
+            });
+        });
+
+        messageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (messageInput.value) {
+                const message = { text: messageInput.value, userId: userId };
+                socket.emit('chat message', message);
+                messageInput.value = '';
+            }
+        });
+
+        socket.on('chat message', (msg) => {
+            displayMessage(msg);
+        });
+
+        function displayMessage(msg) {
+            const item = document.createElement('li');
+            item.classList.add('message', msg.userId === 'user1' ? 'user1' : 'user2');
+
+            const label = document.createElement('span');
+            label.classList.add('user-label');
+            label.textContent = (msg.userId === 'user1' ? 'User 1: ' : 'User 2: ');
+
+            const text = document.createElement('span');
+            text.textContent = msg.text;
+
+            item.appendChild(label);
+            item.appendChild(text);
+            messagesList.appendChild(item);
+            messagesList.scrollTop = messagesList.scrollHeight;
+        }
+    });
+</script>
 </body>
 </html>
