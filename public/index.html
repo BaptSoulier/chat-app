@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chat Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Video and Text Chat</title>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-peer@9/simplepeer.min.js"></script>
     <style>
-        body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f7f7f7; }
-        #chat-container { width: 90%; max-width: 600px; height: 400px; border: 1px solid #ddd; padding: 20px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; }
+        body { display: flex; flex-direction: column; align-items: center; height: 100vh; margin: 0; background-color: #f0f0f0; }
+        #videos { display: flex; justify-content: space-around; width: 80%; }
+        video { width: 300px; height: 200px; background-color: black; }
+        #chat-container { width: 90%; max-width: 600px; height: 400px; border: 1px solid #ddd; padding: 20px; background: white; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; margin-top: 20px; }
         #messages { list-style-type: none; padding: 0; margin: 0; overflow-y: auto; flex-grow: 1; }
         .message { padding: 8px 16px; margin-bottom: 2px; border-radius: 4px; display: flex; }
         .user1 { background-color: #dcf8c6; align-self: flex-start; margin-right: auto; }
@@ -17,9 +21,12 @@
         button { padding: 10px 20px; border: none; background-color: #007BFF; color: white; border-radius: 4px; cursor: pointer; }
         button:hover { background-color: #0056b3; }
     </style>
-
 </head>
 <body>
+<div id="videos">
+    <video id="localVideo" autoplay muted></video>
+    <video id="remoteVideo" autoplay></video>
+</div>
 <div id="chat-container">
     <ul id="messages"></ul>
     <form id="message-form">
@@ -28,52 +35,89 @@
     </form>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const socket = io();
-        const messageForm = document.getElementById('message-form');
-        const messageInput = document.getElementById('message-input');
-        const messagesList = document.getElementById('messages');
+    const localVideo = document.getElementById('localVideo');
+    const remoteVideo = document.getElementById('remoteVideo');
+    const socket = io();
+    let peer;
 
-        // Assignation aléatoire de l'utilisateur pour la démonstration
-        const userId = Math.random() < 0.5 ? 'user1' : 'user2';
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+            localVideo.srcObject = stream;
 
-        // Recevoir et afficher les anciens messages
-        socket.on('load old messages', (messages) => {
-            messages.forEach((msg) => {
-                displayMessage(msg);
+            // Emit ready event when the video stream is ready
+            socket.emit('ready');
+
+            socket.on('userReady', id => {
+                if (!peer) {
+                    createPeer(id, true, stream);
+                }
+            });
+
+            socket.on('receivedSignal', data => {
+                if (!peer) {
+                    createPeer(data.from, false, stream);
+                }
+                peer.signal(data.signal);
+            });
+
+            socket.on('userDisconnected', id => {
+                if (peer) {
+                    peer.destroy();
+                    peer = null;
+                }
             });
         });
 
-        messageForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (messageInput.value) {
-                const message = { text: messageInput.value, userId: userId };
-                socket.emit('chat message', message);
-                messageInput.value = '';
-            }
+    function createPeer(id, initiator, stream) {
+        peer = new SimplePeer({ initiator, stream, trickle: false });
+
+        peer.on('signal', signal => {
+            socket.emit('signal', { to: id, signal });
         });
 
-        socket.on('chat message', (msg) => {
+        peer.on('stream', remoteStream => {
+            remoteVideo.srcObject = remoteStream;
+        });
+    }
+
+    // Text chat logic
+    const messageForm = document.getElementById('message-form');
+    const messageInput = document.getElementById('message-input');
+    const messagesList = document.getElementById('messages');
+    const userId = Math.random() < 0.5 ? 'user1' : 'user2';
+
+    socket.on('load old messages', (messages) => {
+        messages.forEach((msg) => {
             displayMessage(msg);
         });
+    });
 
-        function displayMessage(msg) {
-            const item = document.createElement('li');
-            item.classList.add('message', msg.userId === 'user1' ? 'user1' : 'user2');
-
-            const label = document.createElement('span');
-            label.classList.add('user-label');
-            label.textContent = (msg.userId === 'user1' ? 'User 1: ' : 'User 2: ');
-
-            const text = document.createElement('span');
-            text.textContent = msg.text;
-
-            item.appendChild(label);
-            item.appendChild(text);
-            messagesList.appendChild(item);
-            messagesList.scrollTop = messagesList.scrollHeight;
+    messageForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (messageInput.value) {
+            const message = { text: messageInput.value, userId: userId };
+            socket.emit('chat message', message);
+            messageInput.value = '';
         }
     });
+
+    socket.on('chat message', (msg) => {
+        displayMessage(msg);
+    });
+
+    function displayMessage(msg) {
+        const item = document.createElement('li');
+        item.classList.add('message', msg.userId === 'user1' ? 'user1' : 'user2');
+        const label = document.createElement('span');
+        label.classList.add('user-label');
+        label.textContent = (msg.userId === 'user1' ? 'User 1: ' : 'User 2: ');
+        const text = document.createElement('span');
+        text.textContent = msg.text;
+        item.appendChild(label);
+        item.appendChild(text);
+        messagesList.appendChild(item);
+        messagesList.scrollTop = messagesList.scrollHeight;
+    }
 </script>
 </body>
 </html>
