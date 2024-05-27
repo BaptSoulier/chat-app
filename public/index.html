@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebRTC with Socket.IO</title>
+</head>
+<body>
+<h2>Local Video</h2>
+<video id="localVideo" autoplay muted></video>
+
+<h2>Remote Video</h2>
+<video id="remoteVideo" autoplay></video>
+
+<div>
+    <button onclick="createRoom()">Create Room</button>
+    <button onclick="joinRoom()">Join Room</button>
+    <input id="roomName" placeholder="Room ID">
+</div>
+<p id="roomStatus"></p>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="client.js"></script>
+</body>
+</html>
