@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f6f5f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('https://www.pixelstalk.net/wp-content/uploads/images1/Galaxy-Wallpaper-HD-Free-download.jpg') no-repeat center center fixed;
+    margin: 0;
+    background-size: cover;
+}
+
+.container {
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 1000px;
+    height: 650px;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.right-container {
+    background-color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-container, .register-container {
+    max-width: 300px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.login-container h1, .register-container h1 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.login-container form, .register-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-container input, .register-container input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.login-container button, .register-container button {
+    border-radius: 5px;
+    border: 1px solid #0072ff;
+    background-color: #0072ff;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 45px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+.login-container button:hover, .register-container button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.login-container p, .register-container p {
+    margin-top: 20px;
+}
+
+.login-container a, .register-container a {
+    color: #0072ff;
+    text-decoration: none;
+}
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+.swiper-pagination-bullet {
+    background: #0072ff;
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    opacity: 0.5;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+.sign-in-container {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: #fff;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.sign-up-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+    margin: 20px 0 30px;
+}
+
+.btn {
+    border-radius: 20px;
+    border: 1px solid #0072ff;
+    background-color: #0072ff;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceuil</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="./css/acceuil.css">
+</head>
+<body>
+<div class="container">
+    <div class="form-container sign-in-container">
+        <form action="#">
+            <h1>Bienvenue sur CHATY</h1>
+            <p>Merci de vous connecter pour accéder à Chaty</p>
+        </form>
+    </div>
+    <div class="container">
+        <div class="right-container">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Login Section -->
+                    <div class="swiper-slide">
+                        <div class="login-container">
+                            <h1>Connexion</h1>
+                            <form action="/login" method="POST">
+                                <input type="email" id="email" name="email" placeholder="Email" required>
+                                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+                                <button type="submit">Se connecter</button>
+                            </form>
+                            <p>Don't have an account? <a href="#" onclick="swiper.slideNext()">Sign up now</a>.</p>
+                        </div>
+                    </div>
+                    <!-- Register Section -->
+                    <div class="swiper-slide">
+                        <div class="register-container">
+                            <h1>Créer un compte</h1>
+                            <form action="/register" method="POST">
+                                <input type="email" id="email" name="email" placeholder="Email" required>
+                                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+                                <input type="text" id="lastName" name="lastName" placeholder="Nom" required>
+                                <input type="text" id="firstName" name="firstName" placeholder="Prenom" required>
+                                <input type="text" id="pseudo" name="pseudo" placeholder="Pseudo" required>
+                                <button type="submit">Register</button>
+                            </form>
+                            <p>Already have an account? <a href="#" onclick="swiper.slidePrev()">Créer un compte</a>.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script src="./js/index.js"></script>
+        <script src="./js/client.js"></script>
+
+</body>
+</html>

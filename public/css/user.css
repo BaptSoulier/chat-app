@@ -1,0 +1,94 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    background: url('https://www.pixelstalk.net/wp-content/uploads/images1/Galaxy-Wallpaper-HD-Free-download.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+.container {
+    display: flex;
+    width: 1000px;
+    height: 650px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.left-container, .right-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.left-container {
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    overflow: hidden;
+    position: relative;
+}
+.user-info {
+    max-width: 300px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+.user-info h1 {
+    margin-bottom: 20px;
+    color: #fff;
+}
+.user-info p {
+    margin: 10px 0;
+}
+.right-container {
+    background: url('https://source.unsplash.com/weekly?technology') no-repeat center center;
+    background-size: cover;
+}
+.webrtc-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+.webrtc-container-content {
+    width: 80%;
+    text-align: center;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+}
+.webrtc-container h2 {
+    margin-bottom: 30px;
+    color: #151515;
+}
+.webrtc-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.webrtc-container button {
+    margin: 10px 0;
+    padding: 20px;
+    background-color: #0072ff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 300px;
+}
+.webrtc-container input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    color: black;
+    width: 300px;
+    box-sizing: border-box;
+}

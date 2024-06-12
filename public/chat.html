@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/chat.css">
+    <title>Chat Room</title>
+</head>
+<body>
+<div class="container">
+    <h1>Chat Room</h1>
+    <div class="video-container">
+        <video id="localVideo" autoplay muted></video>
+        <video id="remoteVideo" autoplay></video>
+    </div>
+    <div class="chat-container">
+        <div class="messages" id="messages"></div>
+        <div class="message-input">
+            <input type="text" id="messageInput" placeholder="Type a message">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <p id="roomStatus"></p>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="./js/chat.js"></script>
+
+</body>
+</html>

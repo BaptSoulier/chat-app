@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="./css/user.css"/>
+   
+</head>
+<body>
+<div class="container">
+    <div class="left-container">
+        <div class="user-info" id="user-info">
+            <h1>User Info</h1>
+            <p>Loading...</p>
+        </div>
+    </div>
+    <!-- WebRTC Section -->
+    <div class="right-container">
+        <div class="webrtc-container">
+            <div class="webrtc-container-content">
+                <h2>Create or Join a Room</h2>
+                <div>
+                    <button onclick="createRoom()">Create Room</button>
+                    <button onclick="joinRoom()">Join Room</button>
+                    <input id="roomName" placeholder="Room ID">
+                </div>
+                <p id="roomStatus"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="./js/user.js"></script>
+</body>
+</html>

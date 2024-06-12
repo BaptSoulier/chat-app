@@ -1,0 +1,154 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    background: url('https://www.pixelstalk.net/wp-content/uploads/images1/Galaxy-Wallpaper-HD-Free-download.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+.container {
+    display: flex;
+    width: 1000px;
+    height: 650px;
+    background-color: #24293E;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+.left-container, .right-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.left-container {
+    background-color: #24293E;
+    color: white;
+    overflow: hidden;
+    position: relative;
+}
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.login-container, .register-container {
+    max-width: 300px;
+    width: 100%;
+    padding: 20px;
+    background: #CCCCCC;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    text-align: center;
+}
+.login-container h1, .register-container h1 {
+    margin-bottom: 20px;
+    color: #8EBBFF;
+}
+.login-container form, .register-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-container input, .register-container input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.login-container button, .register-container button {
+    padding: 10px;
+    background-color: #8EBBFF;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+.login-container p, .register-container p {
+    margin-top: 20px;
+}
+.login-container p a, .register-container p a {
+    color: #24293E;
+}
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    border-radius: 50%;
+    background: #8EBBFF;
+    opacity: 0.5;
+    margin: 0 4px;
+    cursor: pointer;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+.right-container {
+    background: url('https://source.unsplash.com/weekly?technology') no-repeat center center;
+    background-size: cover;
+    color:#8EBBFF;
+}
+.webrtc-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+.webrtc-container-content {
+    width: 80%;
+    text-align: center;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.webrtc-container h2 {
+    margin-bottom: 20px;
+    color: #ff9900;
+}
+.webrtc-container div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.webrtc-container button {
+    margin: 5px 0;
+    padding: 10px;
+    background-color: #ff9900;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.webrtc-container input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    color: black;
+    width: 80%;
+    box-sizing: border-box;
+}
