@@ -1,0 +1,25 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-redis": "^7.1.1",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0",
+    "ioredis": "^5.4.1",
+    "path": "^0.12.7",
+    "pg": "^8.12.0",
+    "socket.io": "^4.7.5",
+    "uuidv4": "^6.2.13"
+  }
+}
