@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebRTC with Socket.IO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            width: 50%;
+            max-width: 1200px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: #fff;
+        }
+        .video-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        video {
+            width: 48%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+        .chat-container {
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+        }
+        .messages {
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            background: #fff;
+            margin-bottom: 10px;
+            color: black;
+        }
+        .message {
+            padding: 5px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        .message.user1 {
+            background: #d1e7dd;
+            text-align: right;
+        }
+        .message.user2 {
+            background: #f8d7da;
+        }
+        .message-input {
+            display: flex;
+            justify-content: space-between;
+        }
+        .message-input input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+        .message-input button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            background: #002e62;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .message-input button:hover {
+            background: #296bc7;
+        }
+        .room-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .room-info p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Chaty</h1>
+    <div class="room-info">
+        <h1 id="roomStatus"></h1>
+    </div>
+    <div class="video-container" id="videos">
+        <video id="localVideo" autoplay muted></video>
+        <video id="remoteVideo" autoplay></video>
+    </div>
+        <div class="message-input">
+            <input type="text" id="roomName" placeholder="Room ID">
+        </div>
+        <br>
+        <div class="message-input">
+            <button onclick="createRoom()">Create Room</button>
+
+            <button onclick="joinRoom()">Join Room</button>
+        </div>
+    <div class="chat-container" id="chat">
+        <div class="messages" id="messages"></div>
+        <div class="message-input">
+            <input type="text" id="messageInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="client.js"></script>
+</body>
+</html>

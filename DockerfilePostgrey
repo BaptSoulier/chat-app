@@ -1,0 +1,10 @@
+# Utiliser l'image officielle PostgreSQL
+FROM postgres:13
+
+# Définir les variables d'environnement pour PostgreSQL
+ENV POSTGRES_USER=myuser
+ENV POSTGRES_PASSWORD=mypassword
+ENV POSTGRES_DB=mydatabase
+
+# Exposer le port PostgreSQL
+EXPOSE 5432
